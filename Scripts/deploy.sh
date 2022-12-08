@@ -1,5 +1,4 @@
 #!/bin/bash
-
 sudo apt update -y
 sudo apt-get install build-essential checkinstall
 sudo apt-get install libreadline-gplv2-dev libncursesw5-dev libssl-dev \
@@ -17,4 +16,5 @@ sudo python3.9 -m pip install --upgrade pip
 
 cd /home/ubuntu/code_pipeline
 pip3.9 install -r requirements.txt
+cd qrqr_backend
 gunicorn --bind=0.0.0.0:8000 config.wsgi:application
