@@ -14,9 +14,8 @@ sudo make altinstall
 
 sudo python3.9 -m pip install --upgrade pip
 
-cd /home/ubuntu/code_pipeline
+cd /home/ubuntu/code_pipeline/qrqr_backend
 pip3.9 install -r requirements.txt
-cd qrqr_backend
 sed 's/db_name/qrqr/g' -i secret.json
 sed 's/db_user/gedflow/g' -i secret.json
 sed 's/db_passwd/qwer1234/g' -i secret.json

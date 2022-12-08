@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'guduck',
     'user',
     'push',
+    'storages',
 ]
 
 MIDDLEWARE = [
