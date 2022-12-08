@@ -13,6 +13,8 @@ cd Python-3.9.1
 sudo ./configure --enable-optimizations
 sudo make altinstall
 
+sudo python3.9 -m pip install --upgrade pip
+
 cd -
 cd qrqr_backend
 pip3.9 install -r requirements.txt
