@@ -15,6 +15,6 @@ sudo make altinstall
 
 sudo python3.9 -m pip install --upgrade pip
 
-cd /home/ubuntu/code_pipeline/qrqr_backend
+cd /home/ubuntu/code_pipeline
 pip3.9 install -r requirements.txt
 gunicorn --bind=0.0.0.0:8000 config.wsgi:application
