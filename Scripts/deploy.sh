@@ -23,4 +23,4 @@ sed 's/db_passwd/qwer1234/g' -i secret.json
 sed 's/db_host/oud.kr/g' -i secret.json
 sed 's/db_port/8306/g' -i secret.json
 
-gunicorn --bind=0.0.0.0:8000 config.wsgi:application
+gunicorn --bind=0.0.0.0:8000 config.wsgi:application --daemon
