@@ -16,10 +16,7 @@ sudo python3.9 -m pip install --upgrade pip
 
 cd /home/ubuntu/code_pipeline/qrqr_backend
 pip3.9 install -r requirements.txt
-sed 's/db_name/qrqr/g' -i secret.json
-sed 's/db_user/gedflow/g' -i secret.json
-sed 's/db_passwd/qwer1234/g' -i secret.json
-sed 's/db_host/oud.kr/g' -i secret.json
-sed 's/db_port/8306/g' -i secret.json
+
+wget https://qrqr-static.s3.ap-northeast-2.amazonaws.com/secret.json
 
 gunicorn --bind=0.0.0.0:8000 config.wsgi:application --daemon
