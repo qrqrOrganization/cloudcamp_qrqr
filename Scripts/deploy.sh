@@ -17,6 +17,6 @@ sudo python3.9 -m pip install --upgrade pip
 cd /home/ubuntu/code_pipeline/qrqr_backend
 pip3.9 install -r requirements.txt
 
-wget https://qrqr-static.s3.ap-northeast-2.amazonaws.com/secret.json
+sudo aws s3 cp s3://qrqr-config/secret.json ./
 
 gunicorn --bind=0.0.0.0:8000 config.wsgi:application --daemon
