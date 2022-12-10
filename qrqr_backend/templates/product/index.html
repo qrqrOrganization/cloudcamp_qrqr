@@ -6,66 +6,60 @@
     <title>드래곤볼 리스트</title>
     {% include "base.html" %}
     {% load static %}
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="{% static 'list-style.css'%}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        .grid {
-            display: grid;
-            gap: 1em;
-            grid-template-rows: min-content 1fr min-content;
-            grid-template-columns: 1fr 3fr;
-            grid-template-areas: "a h"
-                                                     "a c"
-                                                     "a f";
-            height: calc(50vh - 2em);
-            width: calc(50vw - 2em); /* not necessary, but just to be explicit */
-            margin: 1em;
-        }
+
     </style>
 </head>
 <body>
 {% include "top.html" %}
-{% load static %}
 {% load humanize %}
 {% block content %}
-    {% if posts %}
-          <div>
-              <table  class="table">
-                  <thead>
-                  <tr>
-                      <th scope="col">name</th>
-                      <th scope="col">imgsrc</th>
-                      <th scope="col">현재가</th>
-                      <th scope="col">최저가</th>
-                      <th scope="col">구독하기</th>
-                      <th scope="col">차트</th>
-                  </tr>
-                  </thead>
+{% if posts %}
+<div>
+    <table class="table">
+        <thead>
+        <tr style="white-space: nowrap;">
+            <th class="col-1 col-sm-1" scope="col">name</th>
+            <th class="col-1 col-sm-1" scope="col">imgsrc</th>
+            <th class="col-1 col-sm-1" scope="col">현재가</th>
+            <th class="col-1 col-sm-1" scope="col">최저가</th>
+            <th class="col-1 col-sm-1" scope="col">구독하기</th>
+            <th class="col-1 col-sm-1" scope="col">차트</th>
+        </tr>
+        </thead>
         {% for post in posts %}
-                  <tr>
-                      <td>{{ post.name }}</td>
-                      <td>
-                          {% if post.imgsrc %}
-                            <img src="{% get_media_prefix %}{{ post.imgsrc }}" class="img-fluid"/>
-                          {% else %}
-                            <img src="{% get_media_prefix %}/noimage.png" class="img-fluid"/>
-                          {% endif %}
-                      </td>
-                      <td>{{ post.price|intcomma }}</td>
-                      <td>{{ post.Low_price|intcomma  }}</td>
-                      <td><a class="post-meta" href="/like/{{ post.id }}?page={{ posts.in_page }}">
-                                {% if request.user in post.like.all %}
-                                <spen id="like_count">{{ post.like.count }}</spen>
-                                {% else %}
-                                <spen id="like_count">{{ post.like.count }}</spen>
-                                {% endif %}
-                            </a>
-                      </td>
-                      <td>
-                        {% if post.week_prices %}
-                         <div class="grid">
-                            <canvas id="chart_{{post.id}}"></canvas>
-                            <script>
+        <tr class="list-tr">
+            <td class="">{{ post.name }}</td>
+            <td class="">
+                <div class="myguduck-div-imgarea" style="">
+                    {% if post.imgsrc %}
+                    <img class="list-img-thumnail" src="{% get_media_prefix %}{{ post.imgsrc }}"/>
+                    {% else %}
+                    <img src="{% get_media_prefix %}/noimage.png" class="img-fluid"/>
+                    {% endif %}
+                </div>
+            </td>
+            <td>{{ post.price|intcomma }}</td>
+            <td>{{ post.Low_price|intcomma }}</td>
+            <td>
+                <a class="post-meta" href="/like/{{ post.id }}?page={{ posts.in_page }}">
+                    {% if request.user in post.like.all %}
+                    <spen id="like_count">{{ post.like.count }}</spen>
+                    {% else %}
+                    <spen id="like_count">{{ post.like.count }}</spen>
+                    {% endif %}
+                </a>
+            </td>
+            <td class="">
+                {% if post.week_prices %}
+                <div class="grid" style="">
+                    <canvas id="chart_{{post.id}}"></canvas>
+                    <script>
                             const labels_{{post.id}} = [ {% for week_price in post.week_prices %}'{{ week_price.time_w }}',{% endfor %}];
                             const data_{{post.id}} = {
                                 labels: labels_{{post.id}},
@@ -78,13 +72,16 @@
                                 plugins: { legend: { display: false   } } }
                             };
                             const chart_{{post.id}} = new Chart(document.getElementById('chart_{{post.id}}'),config_{{post.id}});
-                            </script>
-                          </div>
-                          {% endif %}
-                      </td>
-                  </tr>
+
+
+
+                    </script>
+                </div>
+                {% endif %}
+            </td>
+        </tr>
         {% endfor %}
-            </table>
+    </table>
     <!-- 페이징처리 시작 -->
     <div id="paging">
         <ul class="pagination justify-content-center" style="margin-top: 2rem;">
@@ -124,8 +121,8 @@
         </ul>
     </div>
     <!-- 페이징처리 끝 -->
-          </div>
-    {% endif %}
+</div>
+{% endif %}
 {% include "footer.html" %}
 </body>
 </html>
