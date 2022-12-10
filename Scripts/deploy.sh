@@ -1,4 +1,5 @@
 #!/bin/bash
+sudo dpkg --configure -a
 sudo apt update -y
 sudo apt -y install nginx
 
