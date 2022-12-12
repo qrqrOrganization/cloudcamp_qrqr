@@ -6,8 +6,9 @@
     {% include "base.html" %}
     {% load static %}
     <link rel="stylesheet" href="{% static 'list-style.css'%}">
-    <link rel="stylesheet" href="static/list-style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+    </style>
 </head>
 <body>
 {% include "top.html" %}
@@ -38,26 +39,20 @@
                     {% endif %}
                 </div>
             </td>
-            <td>{{ post.price|intcomma }}</td>
-            <td>{{ post.Low_price|intcomma }}</td>
+            <td><p class="animate__fadeInDown price">{{ post.price|intcomma }}</p></td>
+            <td><p class="animate__fadeInDown Low_price">{{ post.Low_price|intcomma }}</td>
             <td>
-                <!--<a class="post-meta" href="/like/{{ post.id }}?page={{ posts.in_page }}">
-                    {% if request.user in post.like.all %}
-                    <spen id="like_count">{{ post.like.count }}</spen>
-                    {% else %}
-                    <spen id="like_count">{{ post.like.count }}</spen>
-                    {% endif %}
-                </a>-->
                 <div class="budgecard">
-      <a href="/like/{{ post.id }}?page={{ posts.in_page }}" class="notification post-meta">
-           {% if request.user in post.like.all %}
-        <i class="fa fa-bell-o"></i>
-        <span id="like_count" class="badge">{{ post.like.count }}</span>
-          {% else %}
-          <spen id="like_count" class="badge">{{ post.like.count }}</spen>
-          {% endif %}
-      </a>
-</div>
+                    <a href="/like/{{ post.id }}?page={{ posts.in_page }}" class="notification post-meta">
+                        {% if request.user in post.like.all %}
+                        <i class="fa-solid fa-bell"></i>
+                        <span id="like_count" class="badge animate__fadeInDown like_count_style">{{ post.like.count }}</span>
+                        {% else %}
+                        <i class="fa-solid fa-bell"></i>
+                        <spen id="like_count" class="badge animate__fadeInDown like_count_style">{{ post.like.count }}</spen>
+                        {% endif %}
+                    </a>
+                </div>
             </td>
             <td class="">
                 {% if post.week_prices %}
@@ -76,6 +71,7 @@
                                 plugins: { legend: { display: false   } } }
                             };
                             const chart_{{post.id}} = new Chart(document.getElementById('chart_{{post.id}}'),config_{{post.id}});
+
 
 
 

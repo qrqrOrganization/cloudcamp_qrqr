@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&subset=devanagari,latin-ext");
-
 .budgecard {
   padding: 0;
   margin: 0;
@@ -16,11 +14,13 @@
 }
 
 .notification i {
-  font-size: 32px;
-  color: #1b1c24;
-  position: relative;
+    font-size:32px;
+    color: #da8282;
 }
-
+.notification i:hover {
+    color: #e01a1a;
+    transition:0.5s;
+}
 .notification .badge {
   right: -10px;
   position: absolute;
@@ -33,7 +33,7 @@
   color: #f4f4f4;
   width: 30px;
 }
-body{ font-family: 'Noto Sans KR', sans-serif; font-size: 10pt; }
+body{ font-family: 'Noto Sans KR', sans-serif; font-weight:600; font-size:9pt }
         .grid {
             display: grid;
     gap: 1em;
@@ -67,3 +67,26 @@ body{ font-family: 'Noto Sans KR', sans-serif; font-size: 10pt; }
   .list-tr td{ padding-bottom:0px;}
   canvas { margin-top: 40px; }
 }
+
+.price{
+  display: inline-block;
+  margin: 0 0.5rem;
+
+  animation: fadeInDown;
+  animation-duration: 1.2s;
+        }
+.Low_price{
+  display: inline-block;
+  margin: 0 0.5rem;
+
+  animation: fadeInDown;
+  animation-duration: 1.5s;
+}
+
+.like_count_style {
+  display: inline-block;
+  margin: 0 0.2rem;
+
+  animation: fadeInDown;
+  animation-duration: 1.8s;
+   }
