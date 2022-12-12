@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /home/ubuntu/code_pipeline
+    destination: /home/ubuntu/code_pipeline_nginx
     overwrite: yes
 
 permissions:
