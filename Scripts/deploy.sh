@@ -1,5 +1,5 @@
 #!/bin/bash
-sudo apt update -y
+# sudo apt update -y
 # sudo apt-get install build-essential checkinstall
 # sudo apt-get install libreadline-gplv2-dev libncursesw5-dev libssl-dev \
 #     libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev
@@ -12,7 +12,7 @@ sudo apt update -y
 # sudo ./configure --enable-optimizations
 # sudo make altinstall
 
-sudo python3.9 -m pip install --upgrade pip
+# sudo python3.9 -m pip install --upgrade pip
 
 cd /home/ubuntu/code_pipeline/qrqr_backend
 
