@@ -1,6 +1,6 @@
 #!/bin/bash
-aws s3 cp s3://qrqr-config/default ./
+sudo aws s3 cp s3://qrqr-config/default ./
 sudo \mv -f default /etc/nginx/sites-available/default
 sudo fuser -k 80/tcp
 
-systemctl start nginx
+sudo systemctl start nginx
