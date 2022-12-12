@@ -1,19 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title>드래곤볼 리스트</title>
     {% include "base.html" %}
     {% load static %}
     <link rel="stylesheet" href="{% static 'list-style.css'%}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="static/list-style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-
-    </style>
 </head>
 <body>
 {% include "top.html" %}
@@ -24,12 +18,12 @@
     <table class="table">
         <thead>
         <tr style="white-space: nowrap;">
-            <th class="col-1 col-sm-1" scope="col">name</th>
-            <th class="col-1 col-sm-1" scope="col">imgsrc</th>
-            <th class="col-1 col-sm-1" scope="col">현재가</th>
-            <th class="col-1 col-sm-1" scope="col">최저가</th>
-            <th class="col-1 col-sm-1" scope="col">구독하기</th>
-            <th class="col-1 col-sm-1" scope="col">차트</th>
+            <th class="col-1 col-sm-1 col-md-2" scope="col">name</th>
+            <th class="col-1 col-sm-1 col-md-2" scope="col">imgsrc</th>
+            <th class="col-1 col-sm-1 col-md-1" scope="col">현재가</th>
+            <th class="col-1 col-sm-1 col-md-1" scope="col">최저가</th>
+            <th class="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1" scope="col">구독하기</th>
+            <th class="col-1 col-sm-1 col-md-1" scope="col">차트</th>
         </tr>
         </thead>
         {% for post in posts %}
@@ -47,13 +41,23 @@
             <td>{{ post.price|intcomma }}</td>
             <td>{{ post.Low_price|intcomma }}</td>
             <td>
-                <a class="post-meta" href="/like/{{ post.id }}?page={{ posts.in_page }}">
+                <!--<a class="post-meta" href="/like/{{ post.id }}?page={{ posts.in_page }}">
                     {% if request.user in post.like.all %}
                     <spen id="like_count">{{ post.like.count }}</spen>
                     {% else %}
                     <spen id="like_count">{{ post.like.count }}</spen>
                     {% endif %}
-                </a>
+                </a>-->
+                <div class="budgecard">
+      <a href="/like/{{ post.id }}?page={{ posts.in_page }}" class="notification post-meta">
+           {% if request.user in post.like.all %}
+        <i class="fa fa-bell-o"></i>
+        <span id="like_count" class="badge">{{ post.like.count }}</span>
+          {% else %}
+          <spen id="like_count" class="badge">{{ post.like.count }}</spen>
+          {% endif %}
+      </a>
+</div>
             </td>
             <td class="">
                 {% if post.week_prices %}
@@ -72,6 +76,8 @@
                                 plugins: { legend: { display: false   } } }
                             };
                             const chart_{{post.id}} = new Chart(document.getElementById('chart_{{post.id}}'),config_{{post.id}});
+
+
 
 
 

@@ -4,13 +4,22 @@ from django.contrib.auth.decorators import login_required
 from guduck.models import guduck
 from django.core.paginator import Paginator
 import influxdb_client
+import os
 import json
 import datetime
+from pathlib import Path
 
-bucket = "qrqr"
-org = "qrqr"
-token = "DJFvAGHanKa1AUci8PLbzrhm1UPjayh5Re5ulyFCvx4BVVt8JQVi0rdw0jiwPHAlKLAq1l4N-4DcZR0i8oun2w=="
-url="http://oud.kr:8086"
+BASE_DIR = Path(__file__).resolve().parent.parent
+secret_file = os.path.join(BASE_DIR, 'secret.json')
+
+with open(secret_file) as f:
+    secrets = json.loads(f.read())
+
+
+bucket = secrets['bucket']
+org = secrets['org']
+token = secrets['token']
+url=secrets['url']
 @login_required(login_url='/login') #게시글 작성 및 수정 삭제 모두 list 페이지에서 이루어 지므로 모두 list페이지로 보낸다.
 def prog(request, type):
     print("타입없음에러")
@@ -32,7 +41,6 @@ def list(request,category):
         post.Low_price = get_product_val(post.id,'low')
         post.price = get_product_val(post.id,'now')
         post.week_prices = get_product_week_val(post.id)
-        print(post)
     return render(request, 'product/index.html',
                   {'posts': posts, 'request': request})
 def get_product_week_val(pid):
