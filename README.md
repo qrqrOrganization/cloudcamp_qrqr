@@ -1,3 +1,3 @@
 # cloudcamp_qrqr
 
-- 박태준 Join 했습니다!
+- main으로 통합

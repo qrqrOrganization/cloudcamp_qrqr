@@ -3,16 +3,9 @@ from pathlib import Path
 import pymysql
 import os
 import json
-import firebase_admin
-from firebase_admin import credentials
-
-
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-#파벳 셋팅
-cred_path = os.path.join(BASE_DIR, "serviceAccountKey.json")
-cred = credentials.Certificate(cred_path)
-firebase_admin.initialize_app(cred)
+
 
 pymysql.install_as_MySQLdb()
 
@@ -44,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'product',
+    'storages',
     'guduck',
     'user',
     'push',
@@ -141,9 +135,19 @@ STATICFILES_DIRS = [
 STATIC_ROOT = os.path.join(BASE_DIR, '.static_root')
 
 
+# AWS Setting
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT =  os.path.join(BASE_DIR,'media')
+AWS_STORAGE_BUCKET_NAME = 'qrqr-static'
+AWS_QUERYSTRING_AUTH = False
+AWS_S3_HOST = 's3.%s.amazonaws.com' % secrets['AWS_REGION']
+AWS_ACCESS_KEY_ID = secrets['AWS_ACCESS_KEY_ID']
+AWS_SECRET_ACCESS_KEY = secrets['AWS_SECRET_ACCESS_KEY']
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_DEFAULT_ACL = 'public-read'
+AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATIC_URL = "https://%s/static/" % AWS_S3_CUSTOM_DOMAIN
+MEDIA_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
 
 
 # Default primary key field type
@@ -151,4 +155,4 @@ MEDIA_ROOT =  os.path.join(BASE_DIR,'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CSRF_TRUSTED_ORIGINS = ["http://qrqr.oud.kr", "https://qrqr.oud.kr"]
+CSRF_TRUSTED_ORIGINS = ["http://qrqr.oud.kr", "https://qrqr.oud.kr", "http://qr.oud.kr", "https://qr.oud.kr"]
