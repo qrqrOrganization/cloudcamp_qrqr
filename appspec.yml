@@ -12,7 +12,7 @@ permissions:
 
 hooks:
   BeforeInstall:
-    - location: scripts/beforeInstall.bash
+    - location: /Scripts/beforeInstall.bash
       timeout: 300
       runas: root
   ApplicationStart:
