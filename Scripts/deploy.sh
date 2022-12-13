@@ -11,4 +11,4 @@ sudo aws s3 cp s3://qrqr-config/secret.json ./
 sudo aws s3 cp ./static/ s3://qrqr-static/static/ --recursive
 
 fuser -k 8000/tcp
-gunicorn --bind=0.0.0.0:8000 config.wsgi:application --daemon
+gunicorn --bind=0.0.0.0:8000 config.wsgi:application --daemon --access-logfile access.log --error-logfile error.log
